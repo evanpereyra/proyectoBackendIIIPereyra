@@ -1,8 +1,6 @@
+import { faker } from '@faker-js/faker';
 import mongoose from 'mongoose';
 import { createHash } from '../utils/index.js';
-
-const FIRST_NAMES = ['Juan', 'María', 'Carlos', 'Ana', 'Pedro', 'Laura', 'Diego', 'Sofía', 'Luis', 'Valentina', 'Miguel', 'Isabella', 'José', 'Camila', 'Antonio', 'Lucía'];
-const LAST_NAMES = ['García', 'Rodríguez', 'Martínez', 'López', 'González', 'Hernández', 'Pérez', 'Sánchez', 'Ramírez', 'Torres', 'Flores', 'Rivera', 'Gómez', 'Díaz', 'Reyes', 'Morales'];
 
 const ROLES = ['user', 'admin'];
 
@@ -14,21 +12,29 @@ const getEncryptedPassword = async () => {
     return cachedEncryptedPassword;
 };
 
+/**
+ * Genera usuarios mock según la cantidad indicada.
+ * - password: "coder123" encriptada
+ * - role: "user" o "admin"
+ * - pets: array vacío
+ * @param {number} quantity - Cantidad de usuarios a generar
+ * @returns {Promise<Array>} Array de usuarios mock
+ */
 export const generateMockingUsers = async (quantity) => {
     const encryptedPassword = await getEncryptedPassword();
     const users = [];
     const usedEmails = new Set();
 
     for (let i = 0; i < quantity; i++) {
-        const first_name = FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)];
-        const last_name = LAST_NAMES[Math.floor(Math.random() * LAST_NAMES.length)];
-        let email = `${first_name.toLowerCase()}.${last_name.toLowerCase()}${i}@mock.com`;
+        const first_name = faker.person.firstName();
+        const last_name = faker.person.lastName();
+        let email = faker.internet.email({ firstName: first_name, lastName: last_name }).toLowerCase();
         while (usedEmails.has(email)) {
-            email = `${first_name.toLowerCase()}.${last_name.toLowerCase()}${i}_${Date.now()}@mock.com`;
+            email = faker.internet.email({ firstName: first_name, lastName: last_name, provider: `mock${i}.com` }).toLowerCase();
         }
         usedEmails.add(email);
 
-        const role = ROLES[Math.floor(Math.random() * ROLES.length)];
+        const role = faker.helpers.arrayElement(ROLES);
 
         users.push({
             _id: new mongoose.Types.ObjectId(),
@@ -50,15 +56,15 @@ export const generateUsersForInsertion = async (quantity) => {
     const usedEmails = new Set();
 
     for (let i = 0; i < quantity; i++) {
-        const first_name = FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)];
-        const last_name = LAST_NAMES[Math.floor(Math.random() * LAST_NAMES.length)];
-        let email = `mockuser${i}_${Date.now()}_${Math.random().toString(36).slice(2)}@mock.com`;
+        const first_name = faker.person.firstName();
+        const last_name = faker.person.lastName();
+        let email = faker.internet.email({ firstName: first_name, lastName: last_name }).toLowerCase();
         while (usedEmails.has(email)) {
-            email = `mockuser${i}_${Date.now()}_${Math.random().toString(36).slice(2)}@mock.com`;
+            email = faker.internet.email({ firstName: first_name, lastName: last_name, provider: `mock${i}.com` }).toLowerCase();
         }
         usedEmails.add(email);
 
-        const role = ROLES[Math.floor(Math.random() * ROLES.length)];
+        const role = faker.helpers.arrayElement(ROLES);
 
         users.push({
             first_name,

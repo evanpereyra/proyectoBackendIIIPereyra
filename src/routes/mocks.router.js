@@ -5,7 +5,7 @@ const router = Router();
 
 router.get('/', mocksController.getMocks);
 router.get('/mockingpets', mocksController.getMockingPets);
-router.get('/mockingusers', mocksController.getMockingUsers);
+router.get('/mockingusers', mocksController.getMockingUsers50);
 router.post('/generateData', mocksController.generateData);
 
 export default router;

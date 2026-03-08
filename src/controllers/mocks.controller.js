@@ -13,6 +13,13 @@ const getMockingPets = async (req, res) => {
 };
 
 const getMockingUsers = async (req, res) => {
+    const quantity = Math.max(1, parseInt(req.query.quantity) || 50);
+    const users = await generateMockingUsers(quantity);
+    res.send({ status: "success", payload: users });
+};
+
+/** GET /mockingusers: genera 50 usuarios en formato documento Mongo (_id, __v, etc.) */
+const getMockingUsers50 = async (req, res) => {
     const users = await generateMockingUsers(50);
     res.send({ status: "success", payload: users });
 };
@@ -60,5 +67,6 @@ export default {
     getMocks,
     getMockingPets,
     getMockingUsers,
+    getMockingUsers50,
     generateData
 };

@@ -1,3 +1,5 @@
+import {fakerES_MX as fa} from "@faker-js/faker"
+
 import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
