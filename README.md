@@ -8,16 +8,16 @@ API REST con **Express**, **MongoDB** (Mongoose) y documentación **Swagger** en
 
 ## Imagen en Docker Hub
 
-- **Página de la imagen:** [https://hub.docker.com/r/evanpereyra/proyectobackendiiipereyra](https://hub.docker.com/r/evanpereyra/proyectobackendiiipereyra)
+- **Página de la imagen:** [https://hub.docker.com/r/epereyra/be_proyecto_final](https://hub.docker.com/r/epereyra/be_proyecto_final)
 
-Nombre de imagen: `evanpereyra/proyectobackendiiipereyra`
+Nombre de imagen: `epereyra/be_proyecto_final`
 
 ### Descargar y ejecutar desde Docker Hub
 
 Requiere **MongoDB** accesible desde el contenedor (Mongo en el host o en otra red Docker).
 
 ```bash
-docker pull evanpereyra/proyectobackendiiipereyra:latest
+docker pull epereyra/be_proyecto_final:latest
 ```
 
 Ejemplo con MongoDB en el mismo equipo (Windows/Mac: `host.docker.internal`; Linux: IP del host o red Docker según tu configuración):
@@ -25,13 +25,13 @@ Ejemplo con MongoDB en el mismo equipo (Windows/Mac: `host.docker.internal`; Lin
 ```bash
 docker run --rm -p 3000:3000 ^
   -e MONGO_URI=mongodb://host.docker.internal:27017/adoptme ^
-  evanpereyra/proyectobackendiiipereyra:latest
+  epereyra/be_proyecto_final:latest
 ```
 
 PowerShell (una línea):
 
 ```powershell
-docker run --rm -p 3000:3000 -e MONGO_URI=mongodb://host.docker.internal:27017/adoptme evanpereyra/proyectobackendiiipereyra:latest
+docker run --rm -p 3000:3000 -e MONGO_URI=mongodb://host.docker.internal:27017/adoptme epereyra/be_proyecto_final:latest
 ```
 
 - **API:** [http://localhost:3000](http://localhost:3000)  
@@ -119,8 +119,8 @@ npm test
 2. Etiqueta y sube (ajusta el tag `latest` si usas versiones):
 
    ```bash
-   docker tag proyectobackendiiipereyra:local evanpereyra/proyectobackendiiipereyra:latest
-   docker push evanpereyra/proyectobackendiiipereyra:latest
+   docker tag proyectobackendiiipereyra:local epereyra/be_proyecto_final:latest
+   docker push epereyra/be_proyecto_final:latest
    ```
 
 ---
